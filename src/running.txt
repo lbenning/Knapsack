@@ -1,0 +1,46 @@
+There are 2 different simulations that can be ran.
+
+* The first simulation compares the times of the genetic algorithms and PTAS to compute approximations to a generated Knapsack instance. To run the simulation, run
+benchmarkTime.py with the following arguments:
+
+1. Epsilon approximation factor - This is the approximation that the algorithms
+must achieve. 
+
+2. Iterations per Epsilon - This is the number of times each algorithm is run
+per unique epsilon. Due to the stochastic nature of the genetic algorithms, it is
+recommended to run several iterations to get reliable time estimates.
+
+3. Number of different Epsilon - This is the number of times epsilon should be
+increased, i.e. the number of approximation factors the algorithms will be tested on.
+
+4. Value to increase Epsilon - This is the value to increase Epsilon by.
+
+The simulation will then execute, and when finished will display a plot of times
+versus approximation factors for the genetic algorithms and PTAS. If the algorithms
+are run multiple times, the times will be averaged together.
+
+As an example, running ./benchmarkTime.py 0.50 5 5 0.10 will run the genetic algorithms and PTAS 5 different times for Epsilon values 0.50,0.60,0.70,0.80,0.90.
+
+* The second simulation compares the genetic algorithms against Simulated Annealing
+and Random Search. To run the simulation, run benchmarkResult.py with the following
+arguments:
+
+1. Number of evaluations - This is the number of times the fitness function
+may be evaluated per simulation.
+
+2. Number of runs - This is the number of times the algorithms should be run. Like
+before, it is recommended to run the algorithms several times to get reliable
+performance estimates.
+
+3. Sampling density - This is the number of times the best value found so far
+should be recorded during the simulation.
+
+The simulation will then execute, and display a plot of fitness versus
+evaluations for the algorithms, where the fitness is the value of the best
+knapsack found. If the algorithms are run multiple times, their results are
+averaged together.
+
+For example, running ./benchmarkResult.py 5000 2 50 will run the four genetic
+algorithms, simulated annealer and random search 2 different times on a single
+randomly generated large dataset, with 5000 evaluations per run, and recording
+the fitness 50 different times per run (uniformly spread out over number of evaluations.) 

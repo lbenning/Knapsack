@@ -42,24 +42,14 @@ def applyLog(x):
 	return s
 
 # Comparison of genetic algorithms - fitness vs evaluations
-def geneticVisuals(intervals,metrop,metropLinkage,stoch,ranking,det,anneal,rand):
+def geneticVisuals(intervals,metrop,stoch,ranking,det,anneal,rand):
 
 	# Convert the interval set into a sorted list
 	intervals = sorted(list(intervals))
 
-	# Get errors
-	metropBars = applyLog(errorBars(metrop,intervals))
-	metropLinkageBars = applyLog(errorBars(metropLinkage,intervals))
-	stochBars = applyLog(errorBars(stoch,intervals))
-	rankingBars = applyLog(errorBars(ranking,intervals))
-	detBars = applyLog(errorBars(det,intervals))
-	annealBars = applyLog(errorBars(anneal,intervals))
-	randBars = applyLog(errorBars(rand,intervals))
-
 	# Average Values over multiple iterations - take logarithm (since
 		# the fitness values can be in the thousands)
 	metrop = applyLog(collapse(metrop))
-	metropLinkage = applyLog(collapse(metropLinkage))
 	stoch = applyLog(collapse(stoch))
 	ranking = applyLog(collapse(ranking))
 	det = applyLog(collapse(det))
@@ -68,33 +58,11 @@ def geneticVisuals(intervals,metrop,metropLinkage,stoch,ranking,det,anneal,rand)
 
 	# Plot fitness results over predefined intervals
 	pylab.plot(intervals,metrop,"red",label = "Metropolis")
-	pylab.plot(intervals,metropLinkage,"green",label = "Metropolis Linkage")
 	pylab.plot(intervals,stoch,"black", label = "Stoch. Univ. Samp.")
 	pylab.plot(intervals,ranking,"blue", label = "Ranking")
 	pylab.plot(intervals,det,"orange", label = "Determ. Crowding")
-	pylab.plot(intervals,anneal,"yellow", label = "Simulated Annealing")
+	pylab.plot(intervals,anneal,"green", label = "Simulated Annealing")
 	pylab.plot(intervals,rand,"purple", label = "Random")
-
-
-	print metrop
-	print intervals
-	print metropBars
-
-	for x in range(len(intervals)):
-		pylab.errorbar(intervals[x],metrop[x],yerr=metropBars[x],
-		 linestyle="--", marker="None", color="red")
-		pylab.errorbar(intervals[x],metropLinkage[x],yerr=metropLinkageBars[x],
-		 linestyle="None", marker="None", color="green")
-		pylab.errorbar(intervals[x],stoch[x],yerr=stochBars[x],
-		 linestyle="None", marker="None", color="black")
-		pylab.errorbar(intervals[x],ranking[x],yerr=rankingBars[x],
-		 linestyle="None", marker="None", color="blue")
-		pylab.errorbar(intervals[x],det[x],yerr=detBars[x],
-		 linestyle="None", marker="None", color="orange")
-		pylab.errorbar(intervals[x],anneal[x],yerr=annealBars[x],
-		 linestyle="None", marker="None", color="yellow")
-		pylab.errorbar(intervals[x],rand[x],yerr=randBars[x],
-		 linestyle="None", marker="None", color="purple")
 
 	pylab.ylabel('Fitness (Log base 10)')
 	pylab.xlabel('Evaluations')
@@ -141,15 +109,3 @@ def collapse(data):
 			total += data[y][x]
 		t.append(total/len(data))
 	return t
-
-# Computes error bars for multiple simulations on
-# each algorithm - represented as standard deviation
-# over the square root of the number of iterations
-def errorBars(data,inter):
-	devs = []
-	for x in range(len(data[0])):
-		n = np.arange(0,len(data))
-		for y in range(len(data)):
-			n[y] = data[y][x]
-		devs.append(np.std(n)/math.sqrt(inter[x]+1))
-	return devs
