@@ -2,7 +2,7 @@
 
 ## Overview
 
-* This is a project that applies genetic algorithms to the 0/1 Knapsack problem, a hard problem in combinatorial optimization. 
+* Application of genetic algorithms to the 0/1 Knapsack problem, a hard problem in combinatorial optimization. 
 
 ## Running
 
