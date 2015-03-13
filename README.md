@@ -2,13 +2,8 @@
 
 ## Overview
 
-* This is a project that applies genetic algorithms to the 0/1
-knapsack problem. The Knapsack problem is a hard problem in combinatorial
-optimization that is known to be NP-Complete. Assuming the widely held conjecture
-that P is unequal to NP, there is no Polynomial Time algorithm that solves
-for the optimal solution exactly. We therefore turn to approximation methods,
-and genetic algorithms are a type of state-space search method known to excel
-at approximating solutions to discrete optimization problems such as Knapsack.
+* This is a project that applies genetic algorithms to the 0/1 Knapsack problem, a
+* hard problem in combinatorial optimization. 
 
 ## Running
 
